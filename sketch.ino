@@ -35,7 +35,7 @@ void setup() {
 
   WiFi.begin("Wokwi-GUEST", ""); // Conexão à rede WiFi aberta com SSID Wokwi-GUEST
 
-  while (WiFi.status() != WL_CONNECT_FAILED) {
+  while (WiFi.status() == WL_CONNECT_FAILED) {
     delay(100);
     Serial.print(".");
   }
@@ -82,7 +82,7 @@ bool estado_verde = false; // Variável que guarda se o led verde está aceso (t
 bool estado_vermelho = false; // Variável que guarda se o led vermelho está aceso (true) ou apagado (false)
 
 // Função que apaga leds
-void apagar(led){
+void apagar(int led){
   digitalWrite(led, LOW);
   if (led == 2){
     estado_verde = false;
@@ -94,7 +94,7 @@ void apagar(led){
 }
 
 // Função qeu liga leds
-void acender(led){
+void acender(int led){
   digitalWrite(led, HIGH);
   if (led == 2){
     estado_verde = true;
@@ -159,7 +159,7 @@ void loop() {
 
     if (digitalRead(botao) == HIGH && estado_vermelho){
       delay(1000);
-      apagar(led_vermelho)
+      apagar(led_vermelho);
       inicio = millis();
     } else {
       delay(5000);
